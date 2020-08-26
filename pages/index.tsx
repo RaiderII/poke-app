@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import convertString from '../helpers/convertString';
 import PokeList from '../components/PokeList';
-import SearchBar from '../components/SearchBar';
 import db from '../lib/db';
 import { getPokemons } from '../reducers/appSlice';
 import pageAuthentication from '../helpers/pageAuthentication';
