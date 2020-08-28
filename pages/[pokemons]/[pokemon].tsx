@@ -21,6 +21,7 @@ import Container from '../../styled-components/Pokemon/Container';
 import Pokeball from '../../styled-components/Index/Pokeball';
 import Back from '../../styled-components/Pokemon/Back';
 import Title from '../../styled-components/Pokemon/Title';
+import TestLogo from '../../public/arrowtop.svg';
 
 export default function pokemon({ pokemon, myPokemon, userName }) {
   // array of pokemon types
@@ -84,7 +85,7 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
         <Link as={`/`} href="/">
           <Back />
         </Link>
-
+        <TestLogo />
         <Card>
           <img
             alt={pokemon.id}
