@@ -67,7 +67,9 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
     if (!pokemonNames.includes(poke.name)) {
       setNames((prevState: string[]) => [poke.name, ...prevState]);
       await fetch(
-        `http://localhost:3000/api/add-pokemon?pokemon=${poke.name}&id=/${convertString(poke.id)}`,
+        `http://raider-poke-app.vercel.app/api/add-pokemon?pokemon=${poke.name}&id=/${convertString(
+          poke.id
+        )}`,
         {
           method: 'POST',
           headers: {

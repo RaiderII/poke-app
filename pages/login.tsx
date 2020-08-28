@@ -19,7 +19,7 @@ export default function App() {
 
   async function handleLogin(data) {
     try {
-      await fetchJson('http://localhost:3000/api/login', {
+      await fetchJson('http://https://raider-poke-app.vercel.app/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
