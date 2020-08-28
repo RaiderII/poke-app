@@ -18,7 +18,7 @@ export default function ChangePassword({ email }) {
   async function handleReset(data) {
     console.log(data);
     try {
-      const res = await fetchJson('http://raider-poke-app.vercel.app/api/change-password', {
+      const res = await fetchJson('https://raider-poke-app.vercel.app/api/change-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

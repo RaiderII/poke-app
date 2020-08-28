@@ -15,7 +15,7 @@ export default async (ctx: ApiRoutesTypes, db) => {
       if (!err && decoded && checkStatus.rows.length > 0) {
         console.log('redirecting');
         ctx.res.writeHead(302, {
-          Location: 'http://localhost:3000/',
+          Location: 'https://raider-poke-app.vercel.app//',
         });
         ctx.res.end();
       }

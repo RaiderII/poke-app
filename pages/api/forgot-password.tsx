@@ -28,7 +28,7 @@ export default async function forgotPassword(req: NextApiRequest, res: NextApiRe
       [hash, expiresIn, user.email]
     );
 
-    const resetURL = `http://localhost:3000/reset-password?token=${hash}`;
+    const resetURL = `https://localhost:3000/reset-password?token=${hash}`;
 
     const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 

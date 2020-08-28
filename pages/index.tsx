@@ -148,7 +148,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
     await db.query('SELECT pokemon_name FROM pokemons WHERE fk_users_id = $1', [userId])
   ).rows;
 
-  const res = await axios.get('http://pokeapi.co/api/v2/pokemon/?limit=150');
+  const res = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=150');
   const pokemons = res.data.results.map((pokemon: Pokemon) => {
     //  Get individual URL to get the name and id
 

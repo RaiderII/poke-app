@@ -16,7 +16,7 @@ export default function App({ users, emails }) {
   console.log(users);
 
   async function handleLogin(data) {
-    const resp = await fetch('http://https://raider-poke-app.vercel.app/api/signup', {
+    const resp = await fetch('https://https://raider-poke-app.vercel.app/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
