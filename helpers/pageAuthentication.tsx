@@ -8,7 +8,6 @@ export default async (ctx: ApiRoutesTypes, db) => {
       Location: 'https://raider-poke-app.vercel.app/login',
     });
     ctx.res.end();
-    Router.push('https://raider-poke-app.vercel.app/login');
   };
   // cookie expired
   if (ctx.req.headers.cookie === undefined) {
