@@ -27,7 +27,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
           }
           if (!err && result) {
             const claims = { sub: user.rows[0], myPersonName: user.rows[0].email };
-            const jwt = sign(claims, process.env.SECRET, {
+            const jwt = sign(claims, '93cb66b7-302b-4596-936c-47b441e5d8f0', {
               expiresIn: '2h',
             });
 
@@ -42,8 +42,6 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
             res.setHeader(
               'Set-Cookie',
               cookie.serialize('autho', jwt, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== 'development',
                 sameSite: 'strict',
                 maxAge: 7200,
                 path: '/',
