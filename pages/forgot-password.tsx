@@ -21,6 +21,7 @@ export default function ForgotPassword() {
           email: email,
         }),
       });
+      console.log(res);
       setMessage(res.message);
     } catch (error) {
       console.log(error);
