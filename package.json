@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "next": "^9.5.1",
     "next-google-fonts": "^1.2.1",
+    "next-react-svg": "1.1.2",
     "next.js": "^1.0.3",
     "nodemailer": "^6.4.10",
     "pg": "^8.2.1",
