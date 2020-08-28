@@ -7,7 +7,7 @@ interface Props {
 }
 const Menu = ({ openMenu, userName }: Props) => {
   async function handleLogout() {
-    await fetch('http://localhost:3000/api/logout', {
+    await fetch('https://raider-poke-app.vercel.app/api/logout', {
       method: 'POST',
     });
     Router.push('/login');
@@ -16,9 +16,9 @@ const Menu = ({ openMenu, userName }: Props) => {
     <>
       <MenuStyle openMenu={openMenu}>
         <h1>{userName}</h1>
-        <a href="/my-pokemon">My Pokemon</a>
-        <a href="/change-password">Change Password</a>
-        <a href="/">Home</a>
+        <a href="https://raider-poke-app.vercel.app/my-pokemon">My Pokemon</a>
+        <a href="https://raider-poke-app.vercel.app/change-password">Change Password</a>
+        <a href="https://raider-poke-app.vercel.app">Home</a>
         <a onClick={handleLogout}>Logout</a>
       </MenuStyle>
     </>

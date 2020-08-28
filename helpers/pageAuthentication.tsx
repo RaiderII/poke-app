@@ -4,7 +4,7 @@ import { ApiRoutesTypes } from '../lib/ApiRoutesTypes';
 export default async (ctx: ApiRoutesTypes, db) => {
   const loginRedirect = () => {
     ctx.res.writeHead(302, {
-      Location: 'http://localhost:3000/login',
+      Location: 'https://raider-poke-app.vercel.app/login',
     });
     ctx.res.end();
   };

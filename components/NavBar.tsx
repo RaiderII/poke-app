@@ -7,7 +7,7 @@ interface NavBar {
 
 export default function NavBar({ userName }: NavBar) {
   async function handleLogout() {
-    await fetch('http://localhost:3000/api/logout', {
+    await fetch('https://raider-poke-app.vercel.app/api/logout', {
       method: 'POST',
     });
     Router.push('/login');

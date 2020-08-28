@@ -35,12 +35,15 @@ export default function PokeList({ pokemons, myPokemon, turnSearch, search }: Po
   async function addPokemon(poke: AddPokemon) {
     if (!pokemonNames.includes(poke.name)) {
       setNames((prevState: string[]) => [poke.name, ...prevState]);
-      await fetch(`http://localhost:3000/api/add-pokemon?pokemon=${poke.name}&id=${poke.id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      await fetch(
+        `https://raider-poke-app.vercel.app/api/add-pokemon?pokemon=${poke.name}&id=${poke.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
     }
   }
   return (
