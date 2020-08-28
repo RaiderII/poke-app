@@ -1,5 +1,6 @@
 import { verify } from 'jsonwebtoken';
 import { ApiRoutesTypes } from '../lib/ApiRoutesTypes';
+import Router from 'next/router';
 
 export default async (ctx: ApiRoutesTypes, db) => {
   const loginRedirect = () => {
@@ -7,6 +8,7 @@ export default async (ctx: ApiRoutesTypes, db) => {
       Location: 'https://raider-poke-app.vercel.app/login',
     });
     ctx.res.end();
+    Router.push('https://raider-poke-app.vercel.app/login');
   };
   // cookie expired
   if (ctx.req.headers.cookie === undefined) {
