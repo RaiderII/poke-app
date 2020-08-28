@@ -47,7 +47,7 @@ export default function PokeList({ pokemons, myPokemon, turnSearch, search }: Po
     <Body onClick={() => turnSearch(false)}>
       {pokemons.map((poke) => (
         <PokeCard>
-          <Link as={`/pokemons/${poke.name}`} href="/[pokemons]/[pokemon]">
+          <Link as={`/${poke.name}`} href="/[pokemon]">
             <a>
               <p>{poke.name}</p>
               <img

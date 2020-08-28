@@ -108,7 +108,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
             {filteredPoke.map((poke) => {
               return (
                 <ul>
-                  <Link as={`/pokemons/${poke}`} href="/[pokemons]/[pokemon]">
+                  <Link as={`/${poke}`} href="/[pokemon]">
                     <li>{poke}</li>
                   </Link>
                 </ul>

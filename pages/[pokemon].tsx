@@ -1,27 +1,26 @@
 /* eslint-disable no-shadow */
 import axios from 'axios';
-import convertString from '../../helpers/convertString';
+import convertString from '../helpers/convertString';
 // eslint-disable-next-line import/named
-import pageAuthentication from '../../helpers/pageAuthentication';
-import db from '../../lib/db';
-import { ApiRoutesTypes } from '../../lib/ApiRoutesTypes';
+import pageAuthentication from '../helpers/pageAuthentication';
+import db from '../lib/db';
+import { ApiRoutesTypes } from '../lib/ApiRoutesTypes';
 import { useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
-import BasicLayout from '../../styled-components/GlobalStyle';
-import Body from '../../styled-components/Pokemon/Body';
-import TypeIcon from '../../styled-components/Pokemon/TypeIcon';
-import IconWrapper from '../../styled-components/Pokemon/IconWrapper';
-import PokeTypes from '../../styled-components/Pokemon/PokeTypes';
-import TypesContainer from '../../styled-components/Pokemon/TypesContainer';
-import WeightHeight from '../../styled-components/Pokemon/WeightHeight';
-import Abilities from '../../styled-components/Pokemon/Abilities';
-import Card from '../../styled-components/Pokemon/Card';
-import Container from '../../styled-components/Pokemon/Container';
-import Pokeball from '../../styled-components/Index/Pokeball';
-import Back from '../../styled-components/Pokemon/Back';
-import Title from '../../styled-components/Pokemon/Title';
-import TestLogo from '../../public/arrowtop.svg';
+import BasicLayout from '../styled-components/GlobalStyle';
+import Body from '../styled-components/Pokemon/Body';
+import TypeIcon from '../styled-components/Pokemon/TypeIcon';
+import IconWrapper from '../styled-components/Pokemon/IconWrapper';
+import PokeTypes from '../styled-components/Pokemon/PokeTypes';
+import TypesContainer from '../styled-components/Pokemon/TypesContainer';
+import WeightHeight from '../styled-components/Pokemon/WeightHeight';
+import Abilities from '../styled-components/Pokemon/Abilities';
+import Card from '../styled-components/Pokemon/Card';
+import Container from '../styled-components/Pokemon/Container';
+import Pokeball from '../styled-components/Index/Pokeball';
+import Back from '../styled-components/Pokemon/Back';
+import Title from '../styled-components/Pokemon/Title';
 
 export default function pokemon({ pokemon, myPokemon, userName }) {
   // array of pokemon types
@@ -85,7 +84,6 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
         <Link as={`/`} href="/">
           <Back />
         </Link>
-        <TestLogo />
         <Card>
           <img
             alt={pokemon.id}
