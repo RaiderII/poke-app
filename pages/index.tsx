@@ -12,7 +12,6 @@ import { getPokemons } from '../reducers/appSlice';
 import pageAuthentication from '../helpers/pageAuthentication';
 import { RootState, AppDispatch } from './_app';
 import { ApiRoutesTypes } from '../lib/ApiRoutesTypes';
-import Navbar from '../components/NavBar';
 import BasicLayout from '../styled-components/GlobalStyle';
 import Burger from '../components/Burger';
 import Menu from '../components/Menu';
