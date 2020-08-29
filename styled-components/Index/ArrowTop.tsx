@@ -1,4 +1,4 @@
-import ArrowSVG from '../../public/aiconmonstr-arrow-66.svg';
+import ArrowSVG from '../../public/iconmonstr-arrow-66.svg';
 import styled from '@xstyled/styled-components';
 
 const ArrowTop = styled(ArrowSVG)`
