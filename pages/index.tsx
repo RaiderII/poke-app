@@ -103,6 +103,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
               searchRef.current.focus();
             }}
           />
+          {name}
           {filteredPoke.map((poke) => {
             return (
               <ul>
