@@ -86,7 +86,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
       // no error, valid password and valid token
       if (!err && decoded && checkStatus.rows.length > 0) {
         ctx.res.writeHead(302, {
-          Location: 'http://localhost:3000/',
+          Location: 'https://raider-poke-app.vercel.app/',
         });
         ctx.res.end();
       }
