@@ -50,6 +50,9 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
     })
     .filter((poke) => poke);
 
+  console.log('name', name);
+  console.log('filteredPoke', filteredPoke);
+
   console.log('filteredPoke', filteredPoke);
   useEffect(() => {
     document.addEventListener('scroll', () => {
