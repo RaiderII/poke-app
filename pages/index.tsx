@@ -50,7 +50,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
       return poke.name.slice(0, name.length) === 'char' && poke.name;
     })
     .filter((poke) => poke);
-
+  console.log(name);
   useEffect(() => {
     document.addEventListener('scroll', () => {
       const scrollCheck: any = window.scrollY < 100;
