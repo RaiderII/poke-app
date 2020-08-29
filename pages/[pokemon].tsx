@@ -66,17 +66,12 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
   async function addPokemon(poke: AddPokemon) {
     if (!pokemonNames.includes(poke.name)) {
       setNames((prevState: string[]) => [poke.name, ...prevState]);
-      await fetch(
-        `https://raider-poke-app.vercel.app/api/add-pokemon?pokemon=${
-          poke.name
-        }&id=/${convertString(poke.id)}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      await fetch(`/api/add-pokemon?pokemon=${poke.name}&id=/${convertString(poke.id)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     }
   }
 

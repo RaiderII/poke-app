@@ -12,7 +12,7 @@ export default function ForgotPassword() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetchJson('https://raider-poke-app.vercel.app/api/forgot-password', {
+      const res = await fetchJson('/api/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

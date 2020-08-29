@@ -16,7 +16,7 @@ export default function App({ users, emails }) {
   console.log(users);
 
   async function handleLogin(data) {
-    const resp = await fetch('https://https://raider-poke-app.vercel.app/api/signup', {
+    const resp = await fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
       // no error, valid password and valid token
       if (!err && decoded && checkStatus.rows.length > 0) {
         ctx.res.writeHead(302, {
-          Location: 'http://localhost:3000/',
+          Location: '/',
         });
         ctx.res.end();
       }

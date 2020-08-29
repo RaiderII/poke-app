@@ -18,7 +18,7 @@ export default function ResetPassword({ status, user, token }) {
 
   async function handleLogin(data) {
     try {
-      await fetchJson('https://https://raider-poke-app.vercel.app/api/reset-password', {
+      await fetchJson('/api/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

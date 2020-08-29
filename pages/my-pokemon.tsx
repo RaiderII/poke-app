@@ -23,15 +23,12 @@ export default function myPokemon({ pokemon, userName }: Pokemon) {
   const [openMenu, turnMenu] = useState(false);
   const [status, turnStatus] = useState(pokeStatus);
   async function removePokemon({ pokemon_name, fk_users_id }) {
-    await fetch(
-      `https://https://raider-poke-app.vercel.app/api/remove-pokemon?pokemon=${pokemon_name}&id=${fk_users_id}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    await fetch(`/api/remove-pokemon?pokemon=${pokemon_name}&id=${fk_users_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   const findPoke = (poke) => {
