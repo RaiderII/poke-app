@@ -61,7 +61,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
     window.addEventListener('scroll', checkScrollTop);
   });
 
-  console.log(scroll);
+  //console.log(scroll);
 
   //comment
 
