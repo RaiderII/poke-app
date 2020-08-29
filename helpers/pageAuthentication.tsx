@@ -4,10 +4,11 @@ import Router from 'next/router';
 
 export default async (ctx: ApiRoutesTypes, db) => {
   const loginRedirect = () => {
-    ctx.res.writeHead(302, {
-      Location: 'https://raider-poke-app.vercel.app/login',
-    });
-    ctx.res.end();
+    // ctx.res.writeHead(302, {
+    //   Location: 'https://raider-poke-app.vercel.app/login',
+    // });
+    // ctx.res.end();
+    Router.push('/login');
   };
   // cookie expired
   if (ctx.req.headers.cookie === undefined) {
