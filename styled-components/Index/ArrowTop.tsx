@@ -1,6 +1,7 @@
+import IconSVG from '../../public/arrowtop.svg';
 import styled from '@xstyled/styled-components';
 
-const ArrowTop = styled.div`
+const ArrowTop = styled(IconSVG)`
   position: fixed;
   bottom: 4rem;
   right: 17.4rem;
@@ -8,7 +9,7 @@ const ArrowTop = styled.div`
   height: 2.4rem;
   z-index: 9;
   display: ${({ showScroll }) => (showScroll ? 'flex' : 'none')};
-  background: url(/arrowtop.svg) no-repeat center / contain;
+  /* background: url(/arrowtop.svg) no-repeat center / contain; */
 `;
 
 export default ArrowTop;
