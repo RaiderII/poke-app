@@ -103,6 +103,15 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
               searchRef.current.focus();
             }}
           />
+          {filteredPoke.map((poke) => {
+            return (
+              <ul>
+                <Link as={`/${poke}`} href="/[pokemon]">
+                  <li>{poke}</li>
+                </Link>
+              </ul>
+            );
+          })}
 
           <List search={search}>
             {filteredPoke.map((poke) => {
