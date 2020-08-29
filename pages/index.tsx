@@ -85,15 +85,15 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  var scrollable = true;
+  // var scrollable = true;
 
-  var listener = function (e) {
-    if (!scrollable) {
-      e.preventDefault();
-    }
-  };
+  // var listener = function (e) {
+  //   if (!scrollable) {
+  //     e.preventDefault();
+  //   }
+  // };
 
-  document.addEventListener('touchmove', listener, { passive: false });
+  // document.addEventListener('touchmove', listener, { passive: false });
 
   return (
     <BasicLayout>
