@@ -105,14 +105,14 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
               searchRef.current.focus();
             }}
           />
-          {/* {name}
+          {name}
           {filteredPoke.map((poke) => {
             return (
               <ul>
                 <li>{poke}</li>
               </ul>
             );
-          })} */}
+          })}
 
           <List search={search}>
             {filteredPoke.map((poke) => {
