@@ -58,12 +58,6 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
       }
     });
     window.addEventListener('scroll', checkScrollTop);
-
-    function preventBehavior(e) {
-      e.preventDefault();
-    }
-
-    document.addEventListener('touchmove', preventBehavior, { passive: false });
   });
 
   console.log(scroll);
