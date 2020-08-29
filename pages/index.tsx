@@ -63,6 +63,8 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 
   console.log(scroll);
 
+  //comment
+
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
     if (store.length < 150) {
