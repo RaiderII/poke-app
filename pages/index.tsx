@@ -144,7 +144,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   pageAuthentication(ctx, db);
 
   const cookie = ctx.req.headers.cookie.split('=')[1];
-
+  console.log(cookie);
   const query = {
     text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
     values: [cookie],
