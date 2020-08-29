@@ -11,7 +11,6 @@ const List = styled.div`
   color: black;
   background-color: white;
   display: ${(props) => !props.search && 'none'};
-
   ul li {
     font-size: 1.7rem;
     padding-top: 3px;

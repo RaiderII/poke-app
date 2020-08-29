@@ -5,7 +5,7 @@ import Router from 'next/router';
 export default async (ctx: ApiRoutesTypes, db) => {
   const loginRedirect = () => {
     ctx.res.writeHead(302, {
-      Location: '/login',
+      Location: 'https://raider-poke-app.vercel.app/login',
     });
     ctx.res.end();
   };

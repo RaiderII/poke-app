@@ -24,6 +24,10 @@ const MyApp = ({ Component, pageProps }) => {
             href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Nunito:wght@600;900&display=swap"
             rel="stylesheet"
           />
+          <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, maximum-scale=1.0, initial-scale=1"
+          />
         </Head>
 
         <Component {...pageProps} />
