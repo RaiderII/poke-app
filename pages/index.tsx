@@ -44,7 +44,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
   const [showScroll, setShowScroll] = useState(false);
 
   const searchRef = useRef(null);
-
+  // new commit
   const filteredPoke = pokemons
     .map((poke) => {
       return poke.name.slice(0, name.length) === name.toString() && poke.name;
