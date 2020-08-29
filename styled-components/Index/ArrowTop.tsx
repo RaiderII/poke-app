@@ -1,7 +1,7 @@
-import IconSVG from '../../public/back.svg';
+import ArrowSVG from '../../public/arrow-up-circle.svg';
 import styled from '@xstyled/styled-components';
 
-const ArrowTop = styled(IconSVG)`
+const ArrowTop = styled(ArrowSVG)`
   position: fixed;
   bottom: 4rem;
   right: 17.4rem;
