@@ -22,7 +22,7 @@ html {
     position: relative;
     font-family: 'Lato', sans-serif;
     
-  background: grey;
+  background: bgIndex;
 }
 
 `;
