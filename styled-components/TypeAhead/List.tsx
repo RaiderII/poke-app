@@ -1,7 +1,6 @@
 import styled from '@xstyled/styled-components';
 
 const List = styled.div`
-  font: black;
   text-transform: capitalize;
   margin-top: 1rem;
   padding-top: 1rem;
@@ -10,7 +9,7 @@ const List = styled.div`
   max-height: 20rem;
   color: black;
   background-color: white;
-  display: ${(props) => !props.search && 'none'};
+  /* display: ${(props) => !props.search && 'none'}; */
   ul li {
     font-size: 1.7rem;
     padding-top: 3px;

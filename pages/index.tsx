@@ -44,6 +44,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
   const [showScroll, setShowScroll] = useState(false);
 
   const searchRef = useRef(null);
+
   const filteredPoke = pokemons
     .map((poke) => {
       return poke.name.slice(0, name.length) === name && poke.name;
@@ -84,15 +85,6 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  // var scrollable = true;
-
-  // var listener = function (e) {
-  //   if (!scrollable) {
-  //     e.preventDefault();
-  //   }
-  // };
-
-  // document.addEventListener('touchmove', listener, { passive: false });
 
   return (
     <BasicLayout>
