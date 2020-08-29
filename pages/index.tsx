@@ -47,7 +47,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 
   const filteredPoke = pokemons
     .map((poke) => {
-      return poke.name.slice(0, 'char'.length) === 'char' && poke.name;
+      return poke.name.slice(0, name.length) === 'char' && poke.name;
     })
     .filter((poke) => poke);
 
@@ -103,6 +103,14 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
               searchRef.current.focus();
             }}
           />
+          {name}
+          {filteredPoke.map((poke) => {
+            return (
+              <ul>
+                <li>{poke}</li>
+              </ul>
+            );
+          })}
 
           <List search={search}>
             {filteredPoke.map((poke) => {
