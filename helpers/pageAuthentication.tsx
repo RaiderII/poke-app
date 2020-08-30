@@ -5,13 +5,24 @@ import Router from 'next/router';
 export default async (ctx: ApiRoutesTypes, db) => {
   const loginRedirect = () => {
     ctx.res.writeHead(302, {
-      Location: 'https://raider-poke-app.vercel.app/login',
+      Location: '/login',
     });
+
     ctx.res.end();
+
+    return {};
   };
+
+  let test;
+
+  if (!ctx.req) {
+    console.log('!ctx.req');
+    //Router.replace('/login');
+    test = false;
+  }
   // cookie expired
   if (ctx.req.headers.cookie === undefined) {
-    loginRedirect();
+    test = false;
   }
 
   // get cookie from the header
@@ -19,6 +30,7 @@ export default async (ctx: ApiRoutesTypes, db) => {
 
   // cookie set to empty string
   if (cookie === '') {
+    console.log('empty');
     loginRedirect();
   }
 
@@ -31,13 +43,14 @@ export default async (ctx: ApiRoutesTypes, db) => {
 
   // no user with valid token is found
   if (userId.rows.length === 0) {
-    loginRedirect();
+    console.log('no user with valid token');
+    test = false;
   }
 
   const checkStatus = await db.query('SELECT * FROM tokens WHERE token = $1 AND status = True', [
     cookie,
   ]);
-  console.log(checkStatus.rows);
+
   // check the status (boolean) of the token
   if (checkStatus.rows.length === 0) {
     loginRedirect();
@@ -45,9 +58,15 @@ export default async (ctx: ApiRoutesTypes, db) => {
 
   // if the token exists, check if it's correct
   verify(cookie, process.env.SECRET, async (err, decoded) => {
-    // console.log("decoded", decoded);
+    console.log('decoded');
     if (!err && !decoded) {
+      console.log('decoded rejected');
       loginRedirect();
     }
+    if (!err && decoded) {
+      test = true;
+    }
   });
+
+  return test;
 };

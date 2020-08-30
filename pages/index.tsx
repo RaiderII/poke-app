@@ -141,9 +141,17 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 }
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
-  pageAuthentication(ctx, db);
+  const auth = await pageAuthentication(ctx, db);
 
-  const cookie = ctx.req.headers.cookie.split('=')[1];
+  const cookie = ctx.req.headers.cookie?.split('=')[1];
+
+  console.log('auth', auth);
+
+  if (!cookie || !auth) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
+    return {};
+  }
 
   const query = {
     text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
@@ -170,6 +178,8 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
     //  store.dispatch(getPokemons({ pokemon: pokemon.name }));
     return { name: pokemon.name, id };
   });
+
+  console.log('before returning getserversideprops');
 
   return { props: { pokemons, userName, myPokemon } };
 }
