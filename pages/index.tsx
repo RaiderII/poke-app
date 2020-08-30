@@ -143,6 +143,12 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const auth = await pageAuthentication(ctx, db);
 
+  if (ctx.req.headers.cookie === undefined) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
+    return {};
+  }
+
   const cookie = ctx.req.headers.cookie?.split('=')[1];
 
   console.log('auth', auth);
