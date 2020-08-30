@@ -142,11 +142,13 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   let redirect: Boolean;
 
   if (typeof ctx.req.headers.cookie !== 'string') {
-    return { props: { redirect } };
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
   }
 
-  if (ctx.req.headers.cookie === undefined) {
-    return { props: { redirect } };
+  if (!ctx.req.headers.cookie) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
   }
   const cookie = ctx.req.headers.cookie?.split('=')[1];
 
