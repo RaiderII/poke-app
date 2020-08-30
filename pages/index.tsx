@@ -33,9 +33,14 @@ interface HomeProps {
   pokemons: Pokemon[];
   userName: string;
   myPokemon: Pokemon[];
+  redirect?: Boolean;
 }
 
-export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): any {
+export default function Homepage({ pokemons, userName, myPokemon, redirect }: HomeProps): any {
+  if (redirect) {
+    Router.push('/login');
+  }
+
   const store = useSelector((store: RootState) => store.pokeStore);
   const [openMenu, turnMenu] = useState(false);
   const [search, turnSearch] = useState(false);
@@ -134,7 +139,12 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const auth = await pageAuthentication(ctx, db);
 
-  const cookie = ctx.req.headers.cookie!.split('=')[1];
+  let redirect: Boolean;
+
+  if (ctx.req.headers.cookie === undefined) {
+    return { props: { redirect } };
+  }
+  const cookie = ctx.req.headers.cookie?.split('=')[1];
 
   console.log('auth', auth);
 
