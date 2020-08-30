@@ -37,6 +37,10 @@ interface HomeProps {
 }
 
 export default function Homepage({ pokemons, userName, myPokemon, redirect }: HomeProps): any {
+  if (redirect) {
+    Router.push('/login');
+  }
+
   const store = useSelector((store: RootState) => store.pokeStore);
   const [openMenu, turnMenu] = useState(false);
   const [search, turnSearch] = useState(false);
@@ -44,12 +48,9 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
   const [scroll, setScroll] = useState(0);
   const [showScroll, setShowScroll] = useState(false);
 
-  if (redirect) {
-    Router.push('/login');
-  }
-
   const searchRef = useRef(null);
   const filteredPoke = pokemons
+
     .map((poke) => {
       return poke.name.slice(0, name.length) === name && poke.name;
     })
@@ -137,13 +138,21 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const auth = await pageAuthentication(ctx, db);
+
   let redirect: Boolean;
 
-  if (ctx?.req?.headers?.cookie === undefined) {
-    return { props: { redirect } };
+  let test = ctx?.req?.headers?.cookie;
+
+  if (typeof test !== 'string') {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
   }
 
-  const cookie = ctx?.req?.headers?.cookie?.split('=')[1];
+  if (test === undefined) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
+  }
+  const cookie = test.split('=')[1] || '';
 
   console.log('auth', auth);
 
