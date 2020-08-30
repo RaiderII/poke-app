@@ -141,16 +141,18 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
 
   let redirect: Boolean;
 
-  if (typeof ctx?.req?.headers?.cookie !== 'string') {
+  let test = ctx?.req?.headers?.cookie;
+
+  if (typeof test !== 'string') {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
   }
 
-  if (!ctx?.req?.headers?.cookie) {
+  if (test === undefined) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
   }
-  const cookie = ctx?.req?.headers?.cookie.split('=')[1];
+  const cookie = test.split('=')[1];
 
   console.log('auth', auth);
 
