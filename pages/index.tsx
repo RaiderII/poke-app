@@ -45,6 +45,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 
   const searchRef = useRef(null);
   const filteredPoke = pokemons
+
     .map((poke) => {
       return poke.name.slice(0, name.length) === name && poke.name;
     })
@@ -133,7 +134,7 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const auth = await pageAuthentication(ctx, db);
 
-  const cookie = ctx.req.headers.cookie?.split('=')[1];
+  const cookie = ctx.req.headers.cookie!.split('=')[1];
 
   console.log('auth', auth);
 
