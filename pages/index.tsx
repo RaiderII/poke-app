@@ -141,6 +141,10 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
 
   let redirect: Boolean;
 
+  if (typeof ctx.req.headers.cookie !== 'string') {
+    return { props: { redirect } };
+  }
+
   if (ctx.req.headers.cookie === undefined) {
     return { props: { redirect } };
   }
