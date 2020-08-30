@@ -44,13 +44,13 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
   const [showScroll, setShowScroll] = useState(false);
 
   const searchRef = useRef(null);
-
   const filteredPoke = pokemons
     .map((poke) => {
       return poke.name.slice(0, name.length) === name && poke.name;
     })
     .filter((poke) => poke);
-  console.log(name);
+
+  console.log('filteredPoke', filteredPoke);
   useEffect(() => {
     document.addEventListener('scroll', () => {
       const scrollCheck: any = window.scrollY < 100;
@@ -62,8 +62,6 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
   });
 
   console.log(scroll);
-
-  //comment
 
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
@@ -105,14 +103,6 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
               searchRef.current.focus();
             }}
           />
-          {name}
-          {filteredPoke.map((poke) => {
-            return (
-              <ul>
-                <li>{poke}</li>
-              </ul>
-            );
-          })}
 
           <List search={search}>
             {filteredPoke.map((poke) => {
@@ -143,20 +133,21 @@ export default function Homepage({ pokemons, userName, myPokemon }: HomeProps): 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const auth = await pageAuthentication(ctx, db);
 
-  if (ctx.req.headers.cookie === undefined) {
-    ctx.res.writeHead(302, { Location: '/login' });
-    ctx.res.end();
-    return {};
-  }
-
   const cookie = ctx.req.headers.cookie?.split('=')[1];
 
   console.log('auth', auth);
 
   if (!cookie || !auth) {
-    ctx.res.writeHead(302, { Location: '/login' });
-    ctx.res.end();
-    return {};
+    if (ctx.req) {
+      // If `ctx.req` is available it means we are on the server.
+      ctx.res.writeHead(302, { Location: '/login' });
+      ctx.res.end();
+      return {};
+    } else {
+      // This should only happen on client.
+      Router.push('/login');
+      return {};
+    }
   }
 
   const query = {
