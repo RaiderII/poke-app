@@ -99,6 +99,7 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
         <TypeAhead>
           <InputTest
             ref={searchRef}
+            search={search}
             onClick={() => {
               turnSearch(true);
             }}

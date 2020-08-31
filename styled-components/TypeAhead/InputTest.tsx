@@ -27,14 +27,12 @@ const InputTest = styled.input`
   cursor: pointer;
   transition: all 0.3s;
 
-  :focus {
-    outline: none;
-    border-radius: 0;
-    left: 0;
-    width: 99%;
-    color: #000;
-    cursor: auto;
-  }
+  outline: ${({ search }) => search && 'none'};
+  border-radius: ${({ search }) => search && '0'};
+  left: ${({ search }) => search && '0'};
+  width: ${({ search }) => search && '99%'};
+  color: ${({ search }) => search && '#000'};
+  cursor: ${({ search }) => search && 'auto'}; ;;
 `;
 
 export default InputTest;
