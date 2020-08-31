@@ -32,6 +32,7 @@
     "next-react-svg": "1.1.2",
     "next.js": "^1.0.3",
     "nodemailer": "^6.4.10",
+    "nookies": "^2.4.0",
     "pg": "^8.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -41,6 +42,7 @@
     "redux": "^4.0.5",
     "redux-devtools": "^3.5.0",
     "styled-components": "^5.1.1",
+    "swr": "^0.3.1",
     "typescript": "^3.9.6"
   },
   "devDependencies": {

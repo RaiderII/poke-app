@@ -21,6 +21,7 @@ import TypeAhead from '../styled-components/TypeAhead/TypeAhead';
 import List from '../styled-components/TypeAhead/List';
 import InputTest from '../styled-components/TypeAhead/InputTest';
 import ArrowTop from '../styled-components/Index/ArrowTop';
+import { parseCookies } from 'nookies';
 
 interface Pokemon {
   name: string;
@@ -137,37 +138,14 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 }
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
-  const auth = await pageAuthentication(ctx, db);
-
-  let redirect: Boolean;
-
-  let test = ctx?.req?.headers?.cookie;
-
-  if (typeof test !== 'string') {
+  const testCookie = parseCookies(ctx);
+  if (!testCookie.autho) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
+    return;
   }
 
-  if (test === undefined) {
-    ctx.res.writeHead(302, { Location: '/login' });
-    ctx.res.end();
-  }
-  const cookie = test.split('=')[1] || '';
-
-  console.log('auth', auth);
-
-  if (!cookie || !auth) {
-    if (ctx.req) {
-      // If `ctx.req` is available it means we are on the server.
-      ctx.res.writeHead(302, { Location: '/login' });
-      ctx.res.end();
-      return {};
-    } else {
-      // This should only happen on client.
-      Router.push('/login');
-      return {};
-    }
-  }
+  const cookie = testCookie.autho;
 
   const query = {
     text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
@@ -175,6 +153,12 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
     //  rowMode: "array",
   };
   const userId = (await db.query(query)).rows[0].fk_users_id;
+
+  if (!userId) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
+    return;
+  }
 
   const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0].name;
 
