@@ -138,15 +138,13 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 }
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
-  const testCookie = parseCookies(ctx);
+  const cookie = parseCookies(ctx).autho;
 
-  if (!testCookie.autho) {
+  if (!cookie) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
     return { props: {} };
   }
-
-  const cookie = testCookie.autho;
 
   const query = {
     text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
