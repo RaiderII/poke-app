@@ -9,6 +9,7 @@ import LoginContainer from '../styled-components/Login/LoginContainer';
 import BasicLayout from '../styled-components/GlobalStyle';
 import LoginBox from '../styled-components/Login/LoginBox';
 import Link from 'next/link';
+import { parseCookies } from 'nookies';
 
 export default function App() {
   const { register, watch, handleSubmit, errors } = useForm();
@@ -74,10 +75,9 @@ export default function App() {
 }
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
+  const cookie = parseCookies(ctx).autho;
   // check for an active cookie
-  if (ctx.req.headers.cookie !== undefined) {
-    const cookie = ctx.req.headers.cookie.split('=')[1];
-
+  if (cookie) {
     const checkStatus = await db.query('SELECT * FROM tokens WHERE token = $1 AND status = True', [
       cookie,
     ]);
