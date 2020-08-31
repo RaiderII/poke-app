@@ -139,17 +139,12 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const cookie = parseCookies(ctx).autho;
-  pageAuthentication(ctx, db);
 
-  if (pageAuthentication(ctx, db)) {
+  if (!cookie) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
     return { props: {} };
   }
-
-  // if (!cookie) {
-  //   ctx.res.writeHead(302, { Location: '/login' });
-  //   ctx.res.end();
-  //   return { props: {} };
-  // }
 
   const query = {
     text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
@@ -158,11 +153,11 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   };
   const userId = (await db.query(query)).rows[0].fk_users_id;
 
-  // if (!userId) {
-  //   ctx.res.writeHead(302, { Location: '/login' });
-  //   ctx.res.end();
-  //   return { props: {} };
-  // }
+  if (!userId) {
+    ctx.res.writeHead(302, { Location: '/login' });
+    ctx.res.end();
+    return { props: {} };
+  }
 
   const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0].name;
 
