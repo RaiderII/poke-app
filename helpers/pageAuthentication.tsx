@@ -1,8 +1,12 @@
 import { verify } from 'jsonwebtoken';
 import { ApiRoutesTypes } from '../lib/ApiRoutesTypes';
 import Router from 'next/router';
+import { parseCookies } from 'nookies';
 
 export default async (ctx: ApiRoutesTypes, db) => {
+  const cookie = parseCookies(ctx).autho;
+
+  let redirect = false;
   const loginRedirect = () => {
     ctx.res.writeHead(302, {
       Location: '/login',
@@ -10,28 +14,28 @@ export default async (ctx: ApiRoutesTypes, db) => {
 
     ctx.res.end();
 
-    return {};
+    return !redirect;
   };
 
-  let test;
+  if (!cookie) {
+    loginRedirect();
+    return !redirect;
+  }
 
   if (!ctx.req) {
-    console.log('!ctx.req');
-    //Router.replace('/login');
-    test = false;
+    loginRedirect();
+    return !redirect;
   }
   // cookie expired
   if (ctx.req.headers.cookie === undefined) {
-    test = false;
+    loginRedirect();
+    return !redirect;
   }
-
-  // get cookie from the header
-  const cookie = ctx.req.headers.cookie.split('=')[1];
 
   // cookie set to empty string
   if (cookie === '') {
-    console.log('empty');
     loginRedirect();
+    return !redirect;
   }
 
   const query = {
@@ -43,8 +47,8 @@ export default async (ctx: ApiRoutesTypes, db) => {
 
   // no user with valid token is found
   if (userId.rows.length === 0) {
-    console.log('no user with valid token');
-    test = false;
+    loginRedirect();
+    return !redirect;
   }
 
   const checkStatus = await db.query('SELECT * FROM tokens WHERE token = $1 AND status = True', [
@@ -54,6 +58,7 @@ export default async (ctx: ApiRoutesTypes, db) => {
   // check the status (boolean) of the token
   if (checkStatus.rows.length === 0) {
     loginRedirect();
+    return !redirect;
   }
 
   // if the token exists, check if it's correct
@@ -62,11 +67,9 @@ export default async (ctx: ApiRoutesTypes, db) => {
     if (!err && !decoded) {
       console.log('decoded rejected');
       loginRedirect();
-    }
-    if (!err && decoded) {
-      test = true;
+      return !redirect;
     }
   });
 
-  return test;
+  return redirect;
 };
