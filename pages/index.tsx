@@ -139,12 +139,12 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 
 export async function getServerSideProps(ctx: ApiRoutesTypes) {
   const testCookie = parseCookies(ctx);
-  let redirect = true;
-  if (!testCookie.autho) {
-    ctx.res.writeHead(302, { Location: '/login' });
-    ctx.res.end();
-    return { props: {} };
-  }
+
+  // if (!testCookie.autho) {
+  //   ctx.res.writeHead(302, { Location: '/login' });
+  //   ctx.res.end();
+  //   return { props: {} };
+  // }
 
   const cookie = testCookie.autho;
 
@@ -155,7 +155,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   };
   const userId = (await db.query(query)).rows[0].fk_users_id;
 
-  if (!userId) {
+  if (!userId || !testCookie.autho) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
     return { props: {} };
