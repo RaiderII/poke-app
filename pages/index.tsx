@@ -143,7 +143,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (!testCookie.autho) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: { redirect } };
+    return { props: {} };
   }
 
   const cookie = testCookie.autho;
@@ -158,7 +158,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (!userId) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: { redirect } };
+    return { props: {} };
   }
 
   const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0].name;
