@@ -49,13 +49,20 @@ const LoginBox = styled.div(
       }
 
       h2 {
-        margin-left: 1rem;
+        display: inline-box;
+        margin-top: 1rem;
+        margin-left: 0.5rem;
         margin-bottom: 0.5rem;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        color: rgb(53, 102, 94);
 
         :hover {
           color: purple;
         }
+      }
+
+      h2:nth-of-type(2) {
+        margin-left: 7rem;
       }
 
       input:last-child {
@@ -79,7 +86,6 @@ const LoginBox = styled.div(
         display: block;
         margin-bottom: 0.7rem;
         margin-top: 2.5rem;
-        color: black;
         font-size: 14px;
         font-weight: 600;
         color: rgb(53, 102, 94);

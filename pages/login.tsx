@@ -64,6 +64,9 @@ export default function App() {
             <Link as={`/forgot-password`} href="/forgot-password">
               <h2>Forgot password?</h2>
             </Link>
+            <Link as={`/signup`} href="/signup">
+              <h2>Signup</h2>
+            </Link>
             {errors.password && <p>{errors.password.message}</p>}
 
             <input type="submit" />
