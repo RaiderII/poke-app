@@ -52,7 +52,7 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
   const searchRef = useRef(null);
 
   const filteredPoke = pokemons.map((poke) => {
-    return poke.name.slice(0, name.length) === name && poke.name;
+    return poke.name.slice(0, name.length) == name && poke.name;
   });
 
   console.log('filteredPoke', filteredPoke);
