@@ -165,7 +165,7 @@ function ensureAuth(gssp) {
   };
 }
 
-export const getServerSideProps = ensureAuth(() => {
+function getApiData() {
   return async (ctx) => {
     const cookie = parseCookies(ctx).autho;
 
@@ -197,4 +197,6 @@ export const getServerSideProps = ensureAuth(() => {
 
     return { props: { pokemons, userName, myPokemon } };
   };
-});
+}
+
+export const getServerSideProps = ensureAuth(getApiData());
