@@ -165,7 +165,7 @@ function ensureAuth(gssp) {
   };
 }
 
-const getApiData = () => {
+const gSSP = () => {
   return async (ctx) => {
     const cookie = parseCookies(ctx).autho;
 
@@ -199,4 +199,4 @@ const getApiData = () => {
   };
 };
 
-export const getServerSideProps = ensureAuth(getApiData());
+export const getServerSideProps = ensureAuth(gSSP());
