@@ -21,6 +21,7 @@ import Container from '../styled-components/Pokemon/Container';
 import Pokeball from '../styled-components/Index/Pokeball';
 import Back from '../styled-components/Pokemon/Back';
 import Title from '../styled-components/Pokemon/Title';
+import ensureAuth from '../helpers/ensureAuth';
 
 export default function pokemon({ pokemon, myPokemon, userName }) {
   // array of pokemon types
@@ -129,25 +130,28 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
   );
 }
 
-export async function getServerSideProps(ctx: ApiRoutesTypes) {
-  pageAuthentication(ctx, db);
+function gSSP() {
+  return async (ctx: ApiRoutesTypes) => {
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ctx.query.pokemon}`);
 
-  const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${ctx.query.pokemon}`);
+    const cookie = ctx.req.headers.cookie.split('=')[1];
 
-  const cookie = ctx.req.headers.cookie.split('=')[1];
+    const query = {
+      text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
+      values: [cookie],
+      //  rowMode: "array",
+    };
+    const userId = (await db.query(query)).rows[0].fk_users_id;
 
-  const query = {
-    text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
-    values: [cookie],
-    //  rowMode: "array",
+    const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0]
+      .name;
+
+    const myPokemon = (
+      await db.query('SELECT pokemon_name FROM pokemons WHERE fk_users_id = $1', [userId])
+    ).rows;
+
+    return { props: { pokemon: res.data, myPokemon, userName } };
   };
-  const userId = (await db.query(query)).rows[0].fk_users_id;
-
-  const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0].name;
-
-  const myPokemon = (
-    await db.query('SELECT pokemon_name FROM pokemons WHERE fk_users_id = $1', [userId])
-  ).rows;
-
-  return { props: { pokemon: res.data, myPokemon, userName } };
 }
+
+export const getServerSideProps = ensureAuth(gSSP());

@@ -14,6 +14,7 @@ import PokeCard from '../styled-components/Index/PokeCard';
 import Pokeball from '../styled-components/Index/Pokeball';
 import MyPokeBody from '../styled-components/MyPokemon/MyPokeBody';
 import DeleteBttn from '../styled-components/MyPokemon/DeleteBttn';
+import ensureAuth from '../helpers/ensureAuth';
 
 export default function myPokemon({ pokemon, userName }: Pokemon) {
   const pokeStatus = pokemon.map((poke) => {
@@ -80,17 +81,22 @@ export default function myPokemon({ pokemon, userName }: Pokemon) {
   );
 }
 
-export async function getServerSideProps(ctx: ApiRoutesTypes) {
-  pageAuthentication(ctx, db);
-  const cookie = ctx.req.headers.cookie.split('=')[1];
+function gSSP() {
+  return async (ctx: ApiRoutesTypes) => {
+    const cookie = ctx.req.headers.cookie.split('=')[1];
 
-  const userId = (
-    await db.query('SELECT fk_users_id FROM tokens WHERE token = $1 AND status = True', [cookie])
-  ).rows[0].fk_users_id;
+    const userId = (
+      await db.query('SELECT fk_users_id FROM tokens WHERE token = $1 AND status = True', [cookie])
+    ).rows[0].fk_users_id;
 
-  const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0].name;
+    const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0]
+      .name;
 
-  const pokemon = (await db.query('SELECT * FROM pokemons WHERE fk_users_id = $1', [userId])).rows;
+    const pokemon = (await db.query('SELECT * FROM pokemons WHERE fk_users_id = $1', [userId]))
+      .rows;
 
-  return { props: { pokemon, userName } };
+    return { props: { pokemon, userName } };
+  };
 }
+
+export const getServerSideProps = ensureAuth(gSSP());

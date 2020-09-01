@@ -7,6 +7,7 @@ import fetchJson from '../lib/fetchJson';
 import BasicLayout from '../styled-components/GlobalStyle';
 import Change from '../styled-components/ChangePassword/Change';
 import ChangeBox from '../styled-components/ChangePassword/ChangeBox';
+import ensureAuth from '../helpers/ensureAuth';
 
 export default function ChangePassword({ email }) {
   const { register, watch, handleSubmit, errors } = useForm();
@@ -77,22 +78,25 @@ export default function ChangePassword({ email }) {
   );
 }
 
-export async function getServerSideProps(ctx: ApiRoutesTypes) {
-  pageAuthentication(ctx, db);
-  const cookie = ctx.req.headers.cookie.split('=')[1];
-  console.log(cookie);
+function gSSP() {
+  return async (ctx: ApiRoutesTypes) => {
+    const cookie = ctx.req.headers.cookie.split('=')[1];
+    console.log(cookie);
 
-  const query = {
-    text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
-    values: [cookie],
-    //  rowMode: "array",
+    const query = {
+      text: 'SELECT fk_users_id FROM tokens WHERE token = $1 AND status = true',
+      values: [cookie],
+      //  rowMode: "array",
+    };
+    const userId = (await db.query(query)).rows[0].fk_users_id;
+    console.log(userId);
+
+    const email = (await db.query('SELECT email FROM users WHERE id = $1', [userId])).rows[0].email;
+
+    console.log(email);
+
+    return { props: { email } };
   };
-  const userId = (await db.query(query)).rows[0].fk_users_id;
-  console.log(userId);
-
-  const email = (await db.query('SELECT email FROM users WHERE id = $1', [userId])).rows[0].email;
-
-  console.log(email);
-
-  return { props: { email } };
 }
+
+export const getServerSideProps = ensureAuth(gSSP());
