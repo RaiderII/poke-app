@@ -144,7 +144,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (!cookie) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: {} };
+    return;
   }
 
   const query1 = {
@@ -158,7 +158,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (test.rows.length === 0) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: {} };
+    return;
   }
 
   const query = {
@@ -171,7 +171,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (!userId) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: {} };
+    return;
   }
 
   const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0].name;
@@ -179,7 +179,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (!userName) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: {} };
+    return;
   }
 
   const myPokemon = (
@@ -189,7 +189,7 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
   if (!myPokemon) {
     ctx.res.writeHead(302, { Location: '/login' });
     ctx.res.end();
-    return { props: {} };
+    return;
   }
 
   const res = await axios.get('https://pokeapi.co/api/v2/pokemon/?limit=150');
