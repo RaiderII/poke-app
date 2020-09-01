@@ -1,5 +1,6 @@
 import { parseCookies } from 'nookies';
 import db from '../lib/db';
+import { verify } from 'jsonwebtoken';
 
 export default function ensureAuth(gssp) {
   return async (ctx) => {
@@ -23,6 +24,31 @@ export default function ensureAuth(gssp) {
       ctx.res.end();
       return { props: {} };
     }
+
+    if (!ctx.req) {
+      ctx.res.writeHead(302, { Location: '/login' });
+      ctx.res.end();
+      return { props: {} };
+    }
+    const checkStatus = await db.query('SELECT * FROM tokens WHERE token = $1 AND status = True', [
+      cookie,
+    ]);
+
+    // check the status (boolean) of the token
+    if (checkStatus.rows.length === 0) {
+      ctx.res.writeHead(302, { Location: '/login' });
+      ctx.res.end();
+      return { props: {} };
+    }
+
+    // if the token exists, check if it's correct
+    verify(cookie, process.env.SECRET, async (err, decoded) => {
+      if (!err && !decoded) {
+        ctx.res.writeHead(302, { Location: '/login' });
+        ctx.res.end();
+        return { props: {} };
+      }
+    });
     return gssp(ctx);
   };
 }

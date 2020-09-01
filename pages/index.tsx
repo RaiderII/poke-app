@@ -166,8 +166,8 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 //   };
 // }
 
-const gSSP = () => {
-  return async (ctx) => {
+function gSSP() {
+  return async (ctx: ApiRoutesTypes) => {
     const cookie = parseCookies(ctx).autho;
 
     const query = {
@@ -198,6 +198,6 @@ const gSSP = () => {
 
     return { props: { pokemons, userName, myPokemon } };
   };
-};
+}
 
 export const getServerSideProps = ensureAuth(gSSP());
