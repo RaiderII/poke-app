@@ -199,4 +199,4 @@ const getApiData = () => {
   };
 };
 
-export const getServerSideProps = ensureAuth(getApiData);
+export const getServerSideProps = ensureAuth(getApiData());
