@@ -50,8 +50,8 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
   const [showScroll, setShowScroll] = useState(false);
 
   const searchRef = useRef(null);
-  const filteredPoke = pokemons
 
+  const filteredPoke = pokemons
     .map((poke) => {
       return poke.name.slice(0, name.length) === name && poke.name;
     })
@@ -68,7 +68,7 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
     window.addEventListener('scroll', checkScrollTop);
   });
 
-  console.log(scroll);
+  //console.log(scroll);
 
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
@@ -178,8 +178,6 @@ export async function getServerSideProps(ctx: ApiRoutesTypes) {
     //  store.dispatch(getPokemons({ pokemon: pokemon.name }));
     return { name: pokemon.name, id };
   });
-
-  console.log('before returning getserversideprops');
 
   return { props: { pokemons, userName, myPokemon } };
 }
