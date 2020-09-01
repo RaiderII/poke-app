@@ -53,7 +53,7 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
 
   const filteredPoke = pokemons
     .map((poke) => {
-      return poke.name.slice(0, name.length) == name && poke.name;
+      return poke.name.slice(0, name.length).toLowerCase() === name.toLowerCase() && poke.name;
     })
     .filter((poke) => poke);
 
