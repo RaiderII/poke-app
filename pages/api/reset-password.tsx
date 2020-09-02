@@ -20,6 +20,7 @@ export default async function forgotPassword(req: NextApiRequest, res: NextApiRe
     const dateNow = Date.now();
     if (dateNow <= expiresIn) {
       hash(req.body.password, 10, async function (err, hash) {
+        // delete the reset token, reset the timer and set new password
         await db.query(
           'UPDATE users SET password_reset_token = $1, password_reset_expires = $2, password = $3 WHERE email = $4',
           ['', 0, hash, user.email]

@@ -54,7 +54,7 @@ export default function myPokemon({ pokemon, userName }: Pokemon) {
         <MyPokeBody>
           {pokemon.map((poke) => (
             <PokeCard status={findPoke(poke.pokemon_name)}>
-              <Link as={`/pokemons/${poke.pokemon_name}`} href="/[pokemons]/[pokemon]">
+              <Link as={`/${poke.pokemon_name}`} href="/[pokemon]">
                 <a>
                   <p>{poke.pokemon_name}</p>
 
