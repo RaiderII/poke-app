@@ -10,19 +10,17 @@ import BasicLayout from '../styled-components/GlobalStyle';
 import Body from '../styled-components/Burger/Body';
 import Burger from '../components/Burger';
 import Menu from '../components/Menu';
-import PokeCard from '../styled-components/Index/PokeCard';
+import PokeCard from '../styled-components/MyPokemon/PokeCard';
 import Pokeball from '../styled-components/Index/Pokeball';
 import MyPokeBody from '../styled-components/MyPokemon/MyPokeBody';
 import DeleteBttn from '../styled-components/MyPokemon/DeleteBttn';
 import ensureAuth from '../helpers/ensureAuth';
+import updatePoke from '../helpers/updatePoke';
 
 export default function myPokemon({ pokemon, userName }: Pokemon) {
-  const pokeStatus = pokemon.map((poke) => {
-    return { pokemon: poke.pokemon_name, turnedOff: false };
-  });
+  const { turnOff, findDeleted } = updatePoke(pokemon, myPokemon);
 
   const [openMenu, turnMenu] = useState(false);
-  const [status, turnStatus] = useState(pokeStatus);
   async function removePokemon({ pokemon_name, fk_users_id }) {
     await fetch(`/api/remove-pokemon?pokemon=${pokemon_name}&id=${fk_users_id}`, {
       method: 'POST',
@@ -32,20 +30,6 @@ export default function myPokemon({ pokemon, userName }: Pokemon) {
     });
   }
 
-  const findPoke = (poke) => {
-    return status.find((ele) => ele.pokemon === poke).turnedOff;
-  };
-
-  const turnOff = (poke: string) => {
-    turnStatus((prevState) => {
-      return prevState.map((ele) => {
-        if (ele.pokemon === poke) {
-          return { ...ele, turnedOff: true };
-        } else return { ...ele };
-      });
-    });
-  };
-
   return (
     <BasicLayout>
       <Body>
@@ -53,7 +37,7 @@ export default function myPokemon({ pokemon, userName }: Pokemon) {
         <Menu openMenu={openMenu} userName={userName} />
         <MyPokeBody>
           {pokemon.map((poke) => (
-            <PokeCard status={findPoke(poke.pokemon_name)}>
+            <PokeCard status={findDeleted(poke.pokemon_name)}>
               <Link as={`/${poke.pokemon_name}`} href="/[pokemon]">
                 <a>
                   <p>{poke.pokemon_name}</p>

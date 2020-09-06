@@ -129,12 +129,7 @@ export default function Homepage({ pokemons, userName, myPokemon, redirect }: Ho
         <Burger openMenu={openMenu} turnMenu={turnMenu} turnSearch={turnSearch} />
         <Menu openMenu={openMenu} userName={userName} />
         <ArrowTop onClick={scrollTop} showScroll={showScroll} />
-        <PokeList
-          pokemons={pokemons}
-          myPokemon={myPokemon}
-          turnSearch={turnSearch}
-          search={search}
-        />
+        <PokeList pokemons={pokemons} myPokemon={myPokemon} turnSearch={turnSearch} />
       </Body>
     </BasicLayout>
   );

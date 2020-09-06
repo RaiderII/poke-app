@@ -7,6 +7,7 @@ const Body = styled.div`
   justify-content: space-around;
   top: 6rem;
   padding-top: 3rem;
+  width: 100%;
   background-color: bgIndex;
 `;
 
