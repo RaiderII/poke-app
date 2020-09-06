@@ -11,7 +11,7 @@ const Pokeball = styled(PokeballSVG)(
       width: 4rem;
       height: 4rem;
       filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
-      opacity: ${({ turnedOff }) => turnedOff && '0.5'};
+      opacity: ${({ turnedOff, singlePoke }) => (turnedOff || singlePoke) && '0.5'};
       transition: 0.1s;
 
       :active {

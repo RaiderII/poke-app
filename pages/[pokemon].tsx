@@ -22,14 +22,9 @@ import Pokeball from '../styled-components/Index/Pokeball';
 import Back from '../styled-components/Pokemon/Back';
 import Title from '../styled-components/Pokemon/Title';
 import ensureAuth from '../helpers/ensureAuth';
-import updatePoke from '../helpers/updatePoke';
 
 export default function pokemon({ pokemon, myPokemon, userName }) {
   // array of pokemon types
-  console.log('pokemon', pokemon);
-  console.log('myPokemon', myPokemon);
-  const pokeNames = pokemon.map((poke) => ({ pokemon_name: poke.name }));
-  const { findPoke, turnOff } = updatePoke(pokeNames, myPokemon);
   const typesArr = pokemon.types.map((types) => types.type.name);
 
   interface Pokemon {
@@ -68,6 +63,7 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
 
   // then set the state so I don't add them every time I click add pokemon
   const [pokemonNames, setNames] = useState(pokemonArr);
+  const [turnedOff, setTurnedOff] = useState(false);
 
   async function addPokemon(poke: AddPokemon) {
     if (!pokemonNames.includes(poke.name)) {
@@ -130,9 +126,9 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
           </Abilities>
           <Pokeball
             onClick={() => {
-              addPokemon(pokemon), turnOff(pokemon.name);
+              addPokemon(pokemon), setTurnedOff(true);
             }}
-            turnedOff={findPoke(pokemon.name)}
+            singlePoke={turnedOff}
           />
         </Card>
       </Body>
