@@ -22,9 +22,14 @@ import Pokeball from '../styled-components/Index/Pokeball';
 import Back from '../styled-components/Pokemon/Back';
 import Title from '../styled-components/Pokemon/Title';
 import ensureAuth from '../helpers/ensureAuth';
+import updatePoke from '../helpers/updatePoke';
 
 export default function pokemon({ pokemon, myPokemon, userName }) {
   // array of pokemon types
+  console.log('pokemon', pokemon);
+  console.log('myPokemon', myPokemon);
+  const pokeNames = pokemon.map((poke) => ({ pokemon_name: poke.name }));
+  const { findPoke, turnOff } = updatePoke(pokeNames, myPokemon);
   const typesArr = pokemon.types.map((types) => types.type.name);
 
   interface Pokemon {
@@ -123,7 +128,12 @@ export default function pokemon({ pokemon, myPokemon, userName }) {
               ))}
             </ul>
           </Abilities>
-          <Pokeball onClick={() => addPokemon(pokemon)} />
+          <Pokeball
+            onClick={() => {
+              addPokemon(pokemon), turnOff(pokemon.name);
+            }}
+            turnedOff={findPoke(pokemon.name)}
+          />
         </Card>
       </Body>
     </BasicLayout>
