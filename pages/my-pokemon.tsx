@@ -17,7 +17,7 @@ import DeleteBttn from '../styled-components/MyPokemon/DeleteBttn';
 import ensureAuth from '../helpers/ensureAuth';
 import updatePoke from '../helpers/updatePoke';
 
-export default function myPokemon({ pokemon, userName }: Pokemon) {
+export default function myPokemon({ pokemon, userName, myPokemon }: Pokemon) {
   const { turnOff, findDeleted } = updatePoke(pokemon, myPokemon);
 
   const [openMenu, turnMenu] = useState(false);
@@ -73,13 +73,17 @@ function gSSP() {
       await db.query('SELECT fk_users_id FROM tokens WHERE token = $1 AND status = True', [cookie])
     ).rows[0].fk_users_id;
 
+    const myPokemon = (
+      await db.query('SELECT pokemon_name FROM pokemons WHERE fk_users_id = $1', [userId])
+    ).rows;
+
     const userName = (await db.query('SELECT name FROM users WHERE id = $1', [userId])).rows[0]
       .name;
 
     const pokemon = (await db.query('SELECT * FROM pokemons WHERE fk_users_id = $1', [userId]))
       .rows;
 
-    return { props: { pokemon, userName } };
+    return { props: { pokemon, userName, myPokemon } };
   };
 }
 
