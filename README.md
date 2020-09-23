@@ -6,6 +6,10 @@ A Pokedex like app that lets you capture pokemon and save them in your account. 
 
 ## Technologies used
 
+###### Both
+
+* TypeScript
+
 ###### Front end
 
 * React
