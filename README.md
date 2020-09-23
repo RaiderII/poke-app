@@ -1,3 +1,5 @@
+![](https://media2.giphy.com/media/NH5Ndmur3Yw7UdS0Vc/giphy.gif)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
