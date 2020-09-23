@@ -1,6 +1,30 @@
+#  Poke App
+
+A Pokedex like app that lets you capture pokemon and save them in your account. The app currently has a custom authentication system for login, logout, reset password and password recovery via mail.
+
 ![](https://media2.giphy.com/media/NH5Ndmur3Yw7UdS0Vc/giphy.gif)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+## Technologies used
+
+###### Front end
+
+* React
+* Xstyled (Styled-Components based library)
+* Redux
+
+###### Back end
+
+* Next.js
+* Postgres
+* JWT Authentication
+
+
+
+
+
+
+
+
 
 ## Getting Started
 
