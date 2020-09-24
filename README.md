@@ -10,19 +10,19 @@ A Pokedex like app that lets you capture pokemon and save them in your account. 
 
 ###### Front end
 
-* React
 * Xstyled (Styled-Components based library)
 * Redux
 
 ###### Back end
 
-* Next.js
+* Node
 * Postgres
 * JWT Authentication
 
 ###### Both
 
 * TypeScript
+* Next.js
 
 ## Live
 
