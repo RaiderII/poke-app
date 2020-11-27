@@ -1,5 +1,7 @@
 #  Poke App
 
+### Note: due to Google Cloud trial ending the database no longer works and neither does the live demo :worried:
+
 A Pokedex like app that lets you capture pokemon and save them in your account. The app currently has a custom authentication system for login, logout, reset password and password recovery via mail.
 
 ![](https://media2.giphy.com/media/NH5Ndmur3Yw7UdS0Vc/giphy.gif)
